@@ -283,6 +283,9 @@ document.addEventListener('DOMContentLoaded', () => {
     btn.style.background = '#22C55E';
     btn.disabled = true;
 
+    // Открываем бота в MAX в новой вкладке
+    window.open('https://max.ru/id5410093294_bot', '_blank');
+
     setTimeout(() => {
       btn.innerHTML = originalText;
       btn.style.background = '';
