@@ -264,34 +264,49 @@ document.addEventListener('DOMContentLoaded', () => {
   // ===== CONTACT FORM =====
   const contactForm = document.getElementById('contactForm');
 
-  contactForm.addEventListener('submit', (e) => {
+  const LEAD_API = 'https://xn--l1aib.xn--h1aagabnceg1af5d.xn--p1ai:8443/api/order';
+
+  contactForm.addEventListener('submit', async (e) => {
     e.preventDefault();
 
     const formData = new FormData(contactForm);
-    const name = formData.get('name');
-    const phone = formData.get('phone');
-
-    // Show success feedback
     const btn = contactForm.querySelector('.btn');
     const originalText = btn.innerHTML;
-    btn.innerHTML = `
-      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-        <polyline points="20 6 9 17 4 12"/>
-      </svg>
-      Заявка отправлена!
-    `;
-    btn.style.background = '#22C55E';
+
+    const showResult = (html, color, reset) => {
+      btn.innerHTML = html;
+      btn.style.background = color;
+      setTimeout(() => {
+        btn.innerHTML = originalText;
+        btn.style.background = '';
+        btn.disabled = false;
+        if (reset) contactForm.reset();
+      }, 4000);
+    };
+
     btn.disabled = true;
+    btn.innerHTML = 'Отправляем...';
 
-    // Открываем бота в MAX в новой вкладке
-    window.open('https://max.ru/id5410093294_bot', '_blank');
-
-    setTimeout(() => {
-      btn.innerHTML = originalText;
-      btn.style.background = '';
-      btn.disabled = false;
-      contactForm.reset();
-    }, 3000);
+    try {
+      const res = await fetch(LEAD_API, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          name: formData.get('name'),
+          phone: formData.get('phone'),
+          comment: [formData.get('message'), '(заявка с сайта)'].filter(Boolean).join(' ')
+        })
+      });
+      if (!res.ok) throw new Error(res.status);
+      showResult(`
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <polyline points="20 6 9 17 4 12"/>
+        </svg>
+        Заявка отправлена!
+      `, '#22C55E', true);
+    } catch (err) {
+      showResult('Не отправилось — позвоните: +7 953 887-77-93', '#EF4444', false);
+    }
   });
 
   // ===== PHONE MASK =====
