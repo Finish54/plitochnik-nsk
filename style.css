@@ -1523,3 +1523,12 @@ h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
 .form-consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--c-primary); }
 .form-consent a { color: var(--c-primary); text-decoration: underline; }
 .footer-bottom a { color: inherit; text-decoration: underline; }
+
+/* ===== Заявка через MAX (вместо формы) ===== */
+.contact-cta { display: flex; flex-direction: column; gap: 12px; }
+.contact-cta h3 { font-size: 1.3rem; color: var(--c-dark); margin-bottom: 2px; }
+.contact-cta-text { color: var(--c-grey); font-size: 0.95rem; line-height: 1.6; margin-bottom: 6px; }
+.contact-cta .btn { width: 100%; justify-content: center; text-decoration: none; }
+.btn-light { background: var(--c-white); color: var(--c-dark); border: 1px solid var(--c-border); }
+.btn-light:hover { border-color: var(--c-primary); color: var(--c-primary); }
+.contact-cta .form-note { text-align: center; margin-top: 4px; }
