@@ -294,6 +294,7 @@ document.addEventListener('DOMContentLoaded', () => {
         body: JSON.stringify({
           name: formData.get('name'),
           phone: formData.get('phone'),
+          consent: formData.get('consent') === 'on',
           comment: [formData.get('message'), '(заявка с сайта)'].filter(Boolean).join(' ')
         })
       });

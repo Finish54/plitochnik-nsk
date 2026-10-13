@@ -1517,3 +1517,9 @@ h3 { font-size: clamp(1.1rem, 2vw, 1.4rem); }
   opacity: 1;
   pointer-events: all;
 }
+
+/* ===== Согласие на обработку ПДн под формой ===== */
+.form-consent { display: flex; gap: 10px; align-items: flex-start; margin: 4px 0 16px; font-size: 0.85rem; line-height: 1.45; color: var(--c-grey); cursor: pointer; }
+.form-consent input { width: 18px; height: 18px; margin-top: 2px; flex-shrink: 0; accent-color: var(--c-primary); }
+.form-consent a { color: var(--c-primary); text-decoration: underline; }
+.footer-bottom a { color: inherit; text-decoration: underline; }
