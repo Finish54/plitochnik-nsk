@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="ru">
+<html lang="ru" class="no-js">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -15,6 +15,7 @@
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="ru_RU">
   <meta name="twitter:card" content="summary_large_image">
+  <meta name="theme-color" content="#101215">
   <script type="application/ld+json">
   {
     "@context": "https://schema.org",
@@ -45,18 +46,21 @@
   <title>Плиточник.НСК — Профессиональная укладка плитки в Новосибирске</title>
   <link rel="stylesheet" href="style.css">
   <link rel="icon" type="image/x-icon" href="assets/logo.jpg">
+  <link rel="preload" as="image" href="assets/hero-bg.webp" fetchpriority="high">
 </head>
 <body>
 
+  <a class="skip-link" href="#hero">Перейти к содержимому</a>
+
   <!-- ===== HEADER ===== -->
   <header class="header" id="header">
-    <div class="container">
+    <div class="container header-inner">
       <a href="#hero" class="header-logo">
-        <img src="assets/logo.jpg" alt="Логотип Плиточник.НСК">
+        <img src="assets/logo.jpg" alt="Логотип Плиточник.НСК" width="44" height="44">
         <span>Плиточник.НСК</span>
       </a>
 
-      <nav class="nav" id="nav">
+      <nav class="nav" id="nav" aria-label="Основная навигация">
         <a href="#services">Услуги</a>
         <a href="#portfolio">Портфолио</a>
         <a href="#about">О нас</a>
@@ -65,29 +69,32 @@
 
       <div class="header-cta">
         <a href="tel:+79538877793" class="header-phone">+7 (953) 887-77-93</a>
-        <a href="#contact" class="header-btn">Оставить заявку</a>
+        <a href="#contact" class="btn btn-primary btn-sm">Оставить заявку</a>
       </div>
 
-      <div class="burger" id="burger">
+      <button class="burger" id="burger" type="button" aria-label="Открыть меню" aria-expanded="false" aria-controls="nav">
         <span></span>
         <span></span>
         <span></span>
-      </div>
+      </button>
     </div>
   </header>
 
   <div class="nav-overlay" id="navOverlay"></div>
 
   <!-- ===== HERO ===== -->
-  <section class="hero" id="hero">
-    <div class="hero-bg">
-      <img src="assets/hero-bg.webp" width="1024" height="1024" alt="Интерьер с плиткой" loading="eager">
+  <section class="hero" id="hero" tabindex="-1">
+    <!-- WebGL-сцена (ленивая инициализация). Статичный фон — базовый слой. -->
+    <div class="hero-media" aria-hidden="true">
+      <div class="hero-canvas" id="heroCanvas"></div>
+      <img class="hero-fallback" src="assets/hero-bg.webp" width="1024" height="1024" alt="" loading="eager" decoding="async">
+      <div class="hero-veil"></div>
     </div>
 
     <div class="container">
       <div class="hero-content">
         <div class="hero-badge">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M12 2L15.09 8.26L22 9.27L17 14.14L18.18 21.02L12 17.77L5.82 21.02L7 14.14L2 9.27L8.91 8.26L12 2Z"/></svg>
           Отделочные работы в Новосибирске
         </div>
 
@@ -97,7 +104,7 @@
 
         <div class="hero-buttons">
           <a href="https://max.ru/id5410093294_bot" target="_blank" rel="noopener" class="btn btn-primary">
-            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             Рассчитать стоимость
           </a>
           <a href="#portfolio" class="btn btn-outline">Наши работы</a>
@@ -105,22 +112,22 @@
 
         <div class="hero-stats">
           <div class="hero-stat">
-            <div class="hero-stat-number" data-target="12">0<span>+</span></div>
+            <div class="hero-stat-number" data-target="12">12<span>+</span></div>
             <div class="hero-stat-label">Лет опыта</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-number" data-target="850">0<span>+</span></div>
+            <div class="hero-stat-number" data-target="850">850<span>+</span></div>
             <div class="hero-stat-label">Выполненных объектов</div>
           </div>
           <div class="hero-stat">
-            <div class="hero-stat-number" data-target="100">0<span>%</span></div>
+            <div class="hero-stat-number" data-target="100">100<span>%</span></div>
             <div class="hero-stat-label">Гарантия качества</div>
           </div>
         </div>
       </div>
     </div>
 
-    <div class="hero-scroll">
+    <div class="hero-scroll" aria-hidden="true">
       <span>Подробнее</span>
       <div class="hero-scroll-line"></div>
     </div>
@@ -130,42 +137,43 @@
   <section class="section advantages" id="advantages">
     <div class="container">
       <div class="section-header reveal">
+        <span class="eyebrow">Почему мы</span>
         <h2>Почему выбирают нас</h2>
         <p>Мы создаём пространства, которые служат десятилетиями и радуют каждый день</p>
       </div>
 
       <div class="advantages-grid">
-        <div class="advantage-card reveal reveal-delay-1">
-          <div class="advantage-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a1 1 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
+        <article class="advantage-card reveal reveal-delay-1">
+          <div class="advantage-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a1 1 0 000 1.4l1.6 1.6a2 2 0 001.4 0l3.77-3.77a6 6 0 01-7.94 7.94l-6.91 6.91a2.12 2.12 0 01-3-3l6.91-6.91a6 6 0 017.94-7.94l-3.76 3.76z"/></svg>
           </div>
           <h3>Опыт более 12 лет</h3>
           <p>Профессиональные мастера с многолетним стажем и сотнями успешно завершённых проектов</p>
-        </div>
+        </article>
 
-        <div class="advantage-card reveal reveal-delay-2">
-          <div class="advantage-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
+        <article class="advantage-card reveal reveal-delay-2">
+          <div class="advantage-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 11-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>
           </div>
           <h3>Гарантия 3 года</h3>
           <p>Официальная гарантия на все выполненные работы. Уверены в качестве — отвечаем за результат</p>
-        </div>
+        </article>
 
-        <div class="advantage-card reveal reveal-delay-3">
-          <div class="advantage-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
+        <article class="advantage-card reveal reveal-delay-3">
+          <div class="advantage-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="3" width="20" height="14" rx="2" ry="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/></svg>
           </div>
           <h3>Точный расчёт</h3>
           <p>Бесплатный выезд замерщика и детальный расчёт материалов. Никаких скрытых доплат</p>
-        </div>
+        </article>
 
-        <div class="advantage-card reveal reveal-delay-4">
-          <div class="advantage-icon">
-            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
+        <article class="advantage-card reveal reveal-delay-4">
+          <div class="advantage-icon" aria-hidden="true">
+            <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="8" r="7"/><polyline points="8.21 13.89 7 23 12 20 17 23 15.79 13.88"/></svg>
           </div>
           <h3>Премиум-качество</h3>
           <p>Работаем только с проверенными материалами и соблюдаем все технологические нормы</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -174,64 +182,65 @@
   <section class="section services" id="services">
     <div class="container">
       <div class="section-header reveal">
+        <span class="eyebrow">Услуги</span>
         <h2>Наши услуги</h2>
         <p>Полный спектр отделочных работ — от подготовки поверхности до финишной затирки</p>
       </div>
 
       <div class="services-grid">
-        <div class="service-card reveal reveal-delay-1">
-          <div class="service-icon">
+        <article class="service-card tilt reveal reveal-delay-1">
+          <div class="service-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/></svg>
           </div>
           <h3>Укладка керамической плитки</h3>
           <p>Облицовка стен и полов керамической плиткой любого формата. Ровные швы, идеальная геометрия.</p>
           <span class="service-tag">Популярное</span>
-        </div>
+        </article>
 
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-icon">
+        <article class="service-card tilt reveal reveal-delay-2">
+          <div class="service-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><rect x="2" y="2" width="20" height="20" rx="2"/><line x1="2" y1="12" x2="22" y2="12"/><line x1="12" y1="2" x2="12" y2="22"/></svg>
           </div>
           <h3>Укладка керамогранита</h3>
           <p>Работа с крупноформатным керамогранитом, включая слэбы. Современные технологии укладки.</p>
           <span class="service-tag">Крупный формат</span>
-        </div>
+        </article>
 
-        <div class="service-card reveal reveal-delay-3">
-          <div class="service-icon">
+        <article class="service-card tilt reveal reveal-delay-3">
+          <div class="service-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><circle cx="7" cy="7" r="3"/><circle cx="17" cy="7" r="3"/><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><circle cx="12" cy="12" r="2"/></svg>
           </div>
           <h3>Мозаичные работы</h3>
           <p>Декоративная мозаика из стекла, камня и керамики. Создаём уникальные узоры и панно.</p>
           <span class="service-tag">Дизайн</span>
-        </div>
+        </article>
 
-        <div class="service-card reveal reveal-delay-1">
-          <div class="service-icon">
+        <article class="service-card tilt reveal reveal-delay-1">
+          <div class="service-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
           </div>
           <h3>Гидроизоляция</h3>
           <p>Надёжная гидроизоляция ванных комнат, душевых и влажных зон. Проверенные материалы.</p>
           <span class="service-tag">Защита</span>
-        </div>
+        </article>
 
-        <div class="service-card reveal reveal-delay-2">
-          <div class="service-icon">
+        <article class="service-card tilt reveal reveal-delay-2">
+          <div class="service-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/></svg>
           </div>
           <h3>Выравнивание поверхностей</h3>
           <p>Штукатурка стен, стяжка пола, подготовка оснований под укладку. Идеальная плоскость.</p>
           <span class="service-tag">Подготовка</span>
-        </div>
+        </article>
 
-        <div class="service-card reveal reveal-delay-3">
-          <div class="service-icon">
+        <article class="service-card tilt reveal reveal-delay-3">
+          <div class="service-icon" aria-hidden="true">
             <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 016.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 014 19.5v-15A2.5 2.5 0 016.5 2z"/></svg>
           </div>
           <h3>Затирка и герметизация</h3>
           <p>Качественная затирка швов эпоксидными и цементными составами. Герметизация примыканий.</p>
           <span class="service-tag">Финиш</span>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -240,73 +249,86 @@
   <section class="section portfolio" id="portfolio">
     <div class="container">
       <div class="section-header reveal">
+        <span class="eyebrow">Портфолио</span>
         <h2>Наши работы</h2>
         <p>Реальные фотографии объектов, выполненных нашими мастерами в Новосибирске</p>
       </div>
 
-      <div class="portfolio-filters reveal">
-        <button class="filter-btn active" data-filter="all">Все работы</button>
-        <button class="filter-btn" data-filter="bathroom">Ванные</button>
-        <button class="filter-btn" data-filter="kitchen">Кухни</button>
-        <button class="filter-btn" data-filter="floor">Полы</button>
-        <button class="filter-btn" data-filter="mosaic">Мозаика</button>
+      <div class="portfolio-filters reveal" role="group" aria-label="Фильтр работ">
+        <button class="filter-btn active" data-filter="all" type="button" aria-pressed="true">Все работы</button>
+        <button class="filter-btn" data-filter="bathroom" type="button" aria-pressed="false">Ванные</button>
+        <button class="filter-btn" data-filter="kitchen" type="button" aria-pressed="false">Кухни</button>
+        <button class="filter-btn" data-filter="floor" type="button" aria-pressed="false">Полы</button>
+        <button class="filter-btn" data-filter="mosaic" type="button" aria-pressed="false">Мозаика</button>
       </div>
 
-      <div class="portfolio-grid">
-        <div class="portfolio-item reveal reveal-delay-1" data-category="bathroom" id="portfolio-item-1">
-          <img src="assets/portfolio-1.webp" width="1024" height="1024" alt="Ванная комната с плиткой" loading="lazy">
-          <div class="portfolio-overlay">
-            <h3>Ванная комната</h3>
-            <p>Укладка subway-плитки, геометрический пол</p>
-          </div>
-        </div>
+      <div class="portfolio-grid" id="portfolioGrid">
+        <figure class="portfolio-item depth reveal reveal-delay-1" data-category="bathroom" id="portfolio-item-1" data-depth="0.04">
+          <button class="portfolio-open" type="button">
+            <img src="assets/portfolio-1.webp" width="1024" height="1024" alt="Ванная комната с плиткой" loading="lazy" decoding="async">
+            <span class="portfolio-overlay">
+              <span class="portfolio-title">Ванная комната</span>
+              <span class="portfolio-desc">Укладка subway-плитки, геометрический пол</span>
+            </span>
+          </button>
+        </figure>
 
-        <div class="portfolio-item reveal reveal-delay-2" data-category="kitchen" id="portfolio-item-2">
-          <img src="assets/portfolio-2.webp" width="1024" height="1024" alt="Кухонный фартук" loading="lazy">
-          <div class="portfolio-overlay">
-            <h3>Кухонный фартук</h3>
-            <p>Керамическая плитка, раскладка «ёлочка»</p>
-          </div>
-        </div>
+        <figure class="portfolio-item depth reveal reveal-delay-2" data-category="kitchen" id="portfolio-item-2" data-depth="0.07">
+          <button class="portfolio-open" type="button">
+            <img src="assets/portfolio-2.webp" width="1024" height="1024" alt="Кухонный фартук" loading="lazy" decoding="async">
+            <span class="portfolio-overlay">
+              <span class="portfolio-title">Кухонный фартук</span>
+              <span class="portfolio-desc">Керамическая плитка, раскладка «ёлочка»</span>
+            </span>
+          </button>
+        </figure>
 
-        <div class="portfolio-item reveal reveal-delay-3" data-category="floor" id="portfolio-item-3">
-          <img src="assets/portfolio-3.webp" width="1024" height="1024" alt="Напольное покрытие" loading="lazy">
-          <div class="portfolio-overlay">
-            <h3>Напольный керамогранит</h3>
-            <p>Крупноформатные плиты, бесшовная укладка</p>
-          </div>
-        </div>
+        <figure class="portfolio-item depth reveal reveal-delay-3" data-category="floor" id="portfolio-item-3" data-depth="0.05">
+          <button class="portfolio-open" type="button">
+            <img src="assets/portfolio-3.webp" width="1024" height="1024" alt="Напольное покрытие" loading="lazy" decoding="async">
+            <span class="portfolio-overlay">
+              <span class="portfolio-title">Напольный керамогранит</span>
+              <span class="portfolio-desc">Крупноформатные плиты, бесшовная укладка</span>
+            </span>
+          </button>
+        </figure>
 
-        <div class="portfolio-item reveal reveal-delay-1" data-category="bathroom" id="portfolio-item-4">
-          <img src="assets/portfolio-4.webp" width="1024" height="1024" alt="Душевая зона" loading="lazy">
-          <div class="portfolio-overlay">
-            <h3>Душевая зона</h3>
-            <p>Мозаика и крупноформат, гидроизоляция</p>
-          </div>
-        </div>
+        <figure class="portfolio-item depth reveal reveal-delay-1" data-category="bathroom" id="portfolio-item-4" data-depth="0.08">
+          <button class="portfolio-open" type="button">
+            <img src="assets/portfolio-4.webp" width="1024" height="1024" alt="Душевая зона" loading="lazy" decoding="async">
+            <span class="portfolio-overlay">
+              <span class="portfolio-title">Душевая зона</span>
+              <span class="portfolio-desc">Мозаика и крупноформат, гидроизоляция</span>
+            </span>
+          </button>
+        </figure>
 
-        <div class="portfolio-item reveal reveal-delay-2" data-category="mosaic" id="portfolio-item-5">
-          <img src="assets/portfolio-5.webp" width="1024" height="1024" alt="Мозаичное панно" loading="lazy">
-          <div class="portfolio-overlay">
-            <h3>Декоративная мозаика</h3>
-            <p>Стеклянная мозаика, авторский дизайн</p>
-          </div>
-        </div>
+        <figure class="portfolio-item depth reveal reveal-delay-2" data-category="mosaic" id="portfolio-item-5" data-depth="0.06">
+          <button class="portfolio-open" type="button">
+            <img src="assets/portfolio-5.webp" width="1024" height="1024" alt="Мозаичное панно" loading="lazy" decoding="async">
+            <span class="portfolio-overlay">
+              <span class="portfolio-title">Декоративная мозаика</span>
+              <span class="portfolio-desc">Стеклянная мозаика, авторский дизайн</span>
+            </span>
+          </button>
+        </figure>
 
-        <div class="portfolio-item reveal reveal-delay-3" data-category="bathroom" id="portfolio-item-6">
-          <img src="assets/portfolio-6.webp" width="1024" height="1024" alt="Современная ванная" loading="lazy">
-          <div class="portfolio-overlay">
-            <h3>Современная ванная</h3>
-            <p>Керамогранит под мрамор, двойной умывальник</p>
-          </div>
-        </div>
+        <figure class="portfolio-item depth reveal reveal-delay-3" data-category="bathroom" id="portfolio-item-6" data-depth="0.05">
+          <button class="portfolio-open" type="button">
+            <img src="assets/portfolio-6.webp" width="1024" height="1024" alt="Современная ванная" loading="lazy" decoding="async">
+            <span class="portfolio-overlay">
+              <span class="portfolio-title">Современная ванная</span>
+              <span class="portfolio-desc">Керамогранит под мрамор, двойной умывальник</span>
+            </span>
+          </button>
+        </figure>
       </div>
     </div>
   </section>
 
   <!-- Lightbox -->
-  <div class="lightbox" id="lightbox">
-    <button class="lightbox-close" id="lightboxClose">&times;</button>
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Просмотр фотографии" hidden>
+    <button class="lightbox-close" id="lightboxClose" type="button" aria-label="Закрыть просмотр">&times;</button>
     <img src="" alt="Увеличенное фото" id="lightboxImg">
   </div>
 
@@ -314,40 +336,41 @@
   <section class="section process" id="process">
     <div class="container">
       <div class="section-header reveal">
+        <span class="eyebrow">Процесс</span>
         <h2>Как мы работаем</h2>
         <p>Прозрачный процесс от первого звонка до сдачи объекта</p>
       </div>
 
       <div class="process-steps">
-        <div class="process-step reveal reveal-delay-1">
-          <div class="process-step-number">01</div>
+        <article class="process-step reveal reveal-delay-1">
+          <div class="process-step-number" aria-hidden="true">01</div>
           <h3>Консультация</h3>
           <p>Обсуждаем объём работ, пожелания и бюджет</p>
-        </div>
+        </article>
 
-        <div class="process-step reveal reveal-delay-2">
-          <div class="process-step-number">02</div>
+        <article class="process-step reveal reveal-delay-2">
+          <div class="process-step-number" aria-hidden="true">02</div>
           <h3>Замеры</h3>
           <p>Бесплатный выезд замерщика на объект</p>
-        </div>
+        </article>
 
-        <div class="process-step reveal reveal-delay-3">
-          <div class="process-step-number">03</div>
+        <article class="process-step reveal reveal-delay-3">
+          <div class="process-step-number" aria-hidden="true">03</div>
           <h3>Расчёт</h3>
           <p>Точная смета с фиксированной ценой</p>
-        </div>
+        </article>
 
-        <div class="process-step reveal reveal-delay-4">
-          <div class="process-step-number">04</div>
+        <article class="process-step reveal reveal-delay-4">
+          <div class="process-step-number" aria-hidden="true">04</div>
           <h3>Выполнение</h3>
           <p>Работа в согласованные сроки с фотоотчётами</p>
-        </div>
+        </article>
 
-        <div class="process-step reveal reveal-delay-5">
-          <div class="process-step-number">05</div>
+        <article class="process-step reveal reveal-delay-5">
+          <div class="process-step-number" aria-hidden="true">05</div>
           <h3>Приёмка</h3>
           <p>Проверка качества и подписание акта</p>
-        </div>
+        </article>
       </div>
     </div>
   </section>
@@ -357,13 +380,14 @@
     <div class="container">
       <div class="about-wrapper">
         <div class="about-content reveal">
+          <span class="eyebrow">О компании</span>
           <h2>О компании «Плиточник.НСК»</h2>
           <p>Мы — команда профессиональных плиточников с многолетним опытом работы в Новосибирске. Специализируемся на укладке плитки любой сложности: от простых санузлов до эксклюзивных дизайнерских проектов.</p>
           <p>Каждый проект для нас — это возможность создать пространство, которое будет радовать вас долгие годы. Мы используем только проверенные материалы и современные технологии.</p>
 
           <div class="about-features">
             <div class="about-feature">
-              <div class="about-feature-icon">
+              <div class="about-feature-icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <div>
@@ -372,7 +396,7 @@
               </div>
             </div>
             <div class="about-feature">
-              <div class="about-feature-icon">
+              <div class="about-feature-icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <div>
@@ -381,7 +405,7 @@
               </div>
             </div>
             <div class="about-feature">
-              <div class="about-feature-icon">
+              <div class="about-feature-icon" aria-hidden="true">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
               </div>
               <div>
@@ -394,19 +418,19 @@
 
         <div class="about-stats reveal reveal-delay-2">
           <div class="about-stat">
-            <div class="about-stat-number" data-target="850">0</div>
+            <div class="about-stat-number" data-target="850">850</div>
             <div class="about-stat-label">Выполненных объектов</div>
           </div>
           <div class="about-stat">
-            <div class="about-stat-number" data-target="12">0</div>
+            <div class="about-stat-number" data-target="12">12</div>
             <div class="about-stat-label">Лет на рынке</div>
           </div>
           <div class="about-stat">
-            <div class="about-stat-number" data-target="15">0</div>
+            <div class="about-stat-number" data-target="15">15</div>
             <div class="about-stat-label">Мастеров в команде</div>
           </div>
           <div class="about-stat">
-            <div class="about-stat-number" data-target="98">0</div>
+            <div class="about-stat-number" data-target="98">98</div>
             <div class="about-stat-label">% довольных клиентов</div>
           </div>
         </div>
@@ -418,6 +442,7 @@
   <section class="section contact" id="contact">
     <div class="container">
       <div class="section-header reveal">
+        <span class="eyebrow">Контакты</span>
         <h2>Свяжитесь с нами</h2>
         <p>Оставьте заявку — мы перезвоним в течение 15 минут</p>
       </div>
@@ -428,7 +453,7 @@
           <p>Готовы ответить на ваши вопросы и рассчитать стоимость работ</p>
 
           <div class="contact-item">
-            <div class="contact-item-icon">
+            <div class="contact-item-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07 19.5 19.5 0 01-6-6A19.79 19.79 0 012.12 4.18 2 2 0 014.11 2h3a2 2 0 012 1.72c.127.96.361 1.903.7 2.81a2 2 0 01-.45 2.11L8.09 9.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0122 16.92z"/></svg>
             </div>
             <div class="contact-item-text">
@@ -438,17 +463,17 @@
           </div>
 
           <div class="contact-item">
-            <div class="contact-item-icon">
+            <div class="contact-item-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
             </div>
             <div class="contact-item-text">
               <h4>MAX Messenger</h4>
-              <a href="https://max.ru/id5410093294_bot" target="_blank">@id5410093294_bot</a>
+              <a href="https://max.ru/id5410093294_bot" target="_blank" rel="noopener">@id5410093294_bot</a>
             </div>
           </div>
 
           <div class="contact-item">
-            <div class="contact-item-icon">
+            <div class="contact-item-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/><circle cx="12" cy="10" r="3"/></svg>
             </div>
             <div class="contact-item-text">
@@ -458,7 +483,7 @@
           </div>
 
           <div class="contact-item">
-            <div class="contact-item-icon">
+            <div class="contact-item-icon" aria-hidden="true">
               <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
             </div>
             <div class="contact-item-text">
@@ -485,33 +510,33 @@
       <div class="footer-grid">
         <div class="footer-brand">
           <div class="footer-brand-header">
-            <img src="assets/logo.jpg" alt="Логотип">
+            <img src="assets/logo.jpg" alt="Логотип" width="40" height="40" loading="lazy">
             <span>Плиточник.НСК</span>
           </div>
           <p>Профессиональная укладка плитки и отделочные работы в Новосибирске. Работаем с 2013 года. Качество, гарантия, точные сроки.</p>
         </div>
 
-        <div class="footer-col">
+        <nav class="footer-col" aria-label="Навигация в подвале">
           <h4>Навигация</h4>
           <a href="#services">Услуги</a>
           <a href="#portfolio">Портфолио</a>
           <a href="#about">О компании</a>
           <a href="#contact">Контакты</a>
-        </div>
+        </nav>
 
-        <div class="footer-col">
+        <nav class="footer-col" aria-label="Услуги в подвале">
           <h4>Услуги</h4>
           <a href="#services">Укладка плитки</a>
           <a href="#services">Керамогранит</a>
           <a href="#services">Мозаичные работы</a>
           <a href="#services">Гидроизоляция</a>
           <a href="#services">Выравнивание</a>
-        </div>
+        </nav>
 
         <div class="footer-col">
           <h4>Контакты</h4>
           <a href="tel:+79538877793">+7 (953) 887-77-93</a>
-          <a href="https://max.ru/id5410093294_bot" target="_blank">MAX: @id5410093294_bot</a>
+          <a href="https://max.ru/id5410093294_bot" target="_blank" rel="noopener">MAX: @id5410093294_bot</a>
           <a href="#contact">НСО, д.п. Кудряшовский</a>
           <a href="#contact">Пн–Сб: 9:00–18:00</a>
         </div>
@@ -524,6 +549,6 @@
     </div>
   </footer>
 
-  <script src="script.js"></script>
+  <script src="script.js" defer></script>
 </body>
 </html>
