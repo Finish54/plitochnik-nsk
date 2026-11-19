@@ -585,6 +585,42 @@ body.webgl-on .hero-veil{
 .footer-bottom a{color:var(--c-muted);text-decoration:underline;text-underline-offset:3px}
 .footer-bottom a:hover{color:var(--c-brass-lt)}
 
+/* ---------- FOOTER: РЕКВИЗИТЫ ОПЕРАТОРА (152-ФЗ, ст. 5 ФЗ «О рекламе») ---------- */
+.footer-legal{
+  margin-top:clamp(28px,4vw,44px);padding-top:20px;
+  border-top:1px solid var(--c-line);
+  display:flex;flex-direction:column;gap:6px;
+  font-size:.82rem;color:var(--c-dim);
+}
+.footer-legal p{margin:0;max-width:96ch}
+.footer-legal a{color:var(--c-muted);text-decoration:underline;text-underline-offset:3px}
+.footer-legal a:hover{color:var(--c-brass-lt)}
+
+/* ---------- COOKIE-БАННЕР ---------- */
+.cookie-banner{
+  position:fixed;left:0;right:0;bottom:0;z-index:120;
+  padding:16px var(--pad) calc(16px + env(safe-area-inset-bottom));
+  background:var(--c-surface);
+  border-top:1px solid var(--c-line-strong);
+  box-shadow:var(--shadow-md);
+}
+.cookie-banner[hidden]{display:none}
+.cookie-banner__inner{
+  width:100%;max-width:var(--container);margin-inline:auto;
+  display:flex;align-items:center;justify-content:space-between;gap:18px;flex-wrap:wrap;
+}
+.cookie-banner__text{flex:1 1 420px;min-width:0}
+.cookie-banner__text h2{
+  font-size:.95rem;font-weight:700;margin-bottom:4px;color:var(--c-text);
+}
+.cookie-banner__text p{font-size:.86rem;color:var(--c-muted);line-height:1.55;max-width:80ch}
+.cookie-banner__text a{color:var(--c-brass-lt);text-decoration:underline;text-underline-offset:3px}
+.cookie-banner__actions{display:flex;gap:10px;flex-wrap:wrap;flex:0 0 auto}
+@media (max-width:640px){
+  .cookie-banner__inner{flex-direction:column;align-items:stretch}
+  .cookie-banner__actions .btn{flex:1 1 auto}
+}
+
 /* ---------- REVEAL ---------- */
 .reveal{
   opacity:0;

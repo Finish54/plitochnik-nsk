@@ -914,3 +914,74 @@
   root.classList.remove('no-js');
   requestAnimationFrame(updateDepth);
 })();
+
+/* =========================================
+   COOKIE-БАННЕР (согласие на аналитические cookie)
+   Решение хранится в localStorage, аналитика
+   подключается ТОЛЬКО после явного согласия.
+   ========================================= */
+(function () {
+  'use strict';
+
+  var KEY = 'plit_cookie_consent_v1';
+  var banner = document.getElementById('cookie-banner');
+  if (!banner) return;
+
+  var read = function () {
+    try { return JSON.parse(window.localStorage.getItem(KEY) || 'null'); }
+    catch (e) { return null; }
+  };
+  var write = function (value) {
+    try { window.localStorage.setItem(KEY, JSON.stringify(value)); } catch (e) {}
+  };
+
+  /* Аналитика включается только здесь — и только при согласии.
+     Идентификатор счётчика появится на этапе подключения Метрики. */
+  var initAnalytics = function () {
+    var id = window.YM_COUNTER_ID;
+    if (!id || window.__ymLoaded) return;
+    window.__ymLoaded = true;
+    (function (m, e, t, i, r, k) {
+      m[i] = m[i] || function () { (m[i].a = m[i].a || []).push(arguments); };
+      r = e.createElement(t); r.async = 1; r.src = k;
+      var first = e.getElementsByTagName(t)[0]; first.parentNode.insertBefore(r, first);
+    })(window, document, 'script', 'ym', 'ym', 'https://mc.yandex.ru/metrika/tag.js');
+    window.ym(id, 'init', { clickmap: true, trackLinks: true, accurateTrackBounce: true, webvisor: true });
+  };
+
+  var apply = function (value) {
+    document.documentElement.classList.toggle('has-analytics', !!value.analytics);
+    if (value.analytics) initAnalytics();
+    document.dispatchEvent(new CustomEvent('cookie-consent', { detail: value }));
+  };
+
+  var decide = function (analytics) {
+    var value = { analytics: !!analytics, ts: Date.now() };
+    write(value);
+    apply(value);
+    banner.hidden = true;
+  };
+
+  var stored = read();
+  if (stored) {
+    apply(stored);
+  } else {
+    banner.hidden = false;
+  }
+
+  var accept = document.getElementById('cookie-accept');
+  var essential = document.getElementById('cookie-essential');
+  if (accept) accept.addEventListener('click', function () { decide(true); });
+  if (essential) essential.addEventListener('click', function () { decide(false); });
+
+  /* Ссылка «Настройки cookie» в подвале — вернуть решение на выбор. */
+  var settings = document.getElementById('cookie-settings');
+  if (settings) {
+    settings.addEventListener('click', function (e) {
+      e.preventDefault();
+      banner.hidden = false;
+      banner.setAttribute('tabindex', '-1');
+      banner.focus();
+    });
+  }
+})();
